@@ -184,7 +184,7 @@ private fun WebViewPanel(
     val latestSettings = rememberUpdatedState(appSettings)
     val latestScripts = rememberUpdatedState(scripts)
 
-    val webViewClient = remember {
+    val slyWebViewClient = remember {
         object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 val currentSettings = latestSettings.value
@@ -216,7 +216,7 @@ private fun WebViewPanel(
                 settings.useWideViewPort = appSettings.desktopMode
                 settings.loadWithOverviewMode = appSettings.desktopMode
                 keepScreenOn = appSettings.keepScreenOn
-                webViewClient = webViewClient
+                this.webViewClient = slyWebViewClient
                 CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
                 loadUrl(appSettings.startUrl)
             }
